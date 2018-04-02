@@ -8,7 +8,7 @@ import numpy as np
 
 
 #Path where coccurrence matrix is stored
-COCCURRENCE_MATRIX_PATH = "/Data/Coocuurence matrix News 2.npy"
+COOCCURRENCE_MATRIX_PATH = "/Data/Coocuurence matrix News 2.npy"
 OUTPUT_DIR = '/output/'
 
 '''
@@ -114,7 +114,7 @@ parameters: epochs          -> number of epochs to train
             d               -> dimension of the word vectors
 '''
 def main(epochs=5, learning_rate=0.05, d=50):
-    X = np.load(COCCURRENCE_MATRIX_PATH)  
+    X = np.load(COOCCURRENCE_MATRIX_PATH)  
     #X = np.load("../Data/Coocuurence matrix News 2.npy")
     
     vocab_size = X.shape[0]
@@ -124,7 +124,7 @@ def main(epochs=5, learning_rate=0.05, d=50):
     assert(params["U"].shape[1] == d)
     
     for i in range(epochs):
-        params, grad_sq = update_parameters(X, vocab_size, params, grad_sq)
+        params, grad_sq = update_parameters(X, vocab_size, params, grad_sq, learning_rate)
         if i % 5 == 4:
             np.save(OUTPUT_DIR+'Param_U'+str(i), params["U"])
             np.save(OUTPUT_DIR+'Param_V'+str(i), params["V"])
